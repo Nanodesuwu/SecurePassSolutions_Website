@@ -1,0 +1,328 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1f2937;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    text-align: center;
+    padding: 0; /* Remove padding around the logo */
+    margin-bottom: 20px; /* Adjust bottom margin */
+}
+
+.sidebar .logo img {
+    display: block; /* Ensures the image does not have extra space around it */
+    max-width: 100%; /* Ensures the image doesn't overflow its container */
+    height: auto;
+    margin: 0 auto; /* Centers the image horizontally within the container */
+}
+
+.search-bar {
+    margin: 10px 0;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
+
+.sidebar-section {
+    margin: 20px 0;
+}
+
+.collapse-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.collapse-btn i {
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.collapsible {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.collapsible li {
+    margin: 10px 0;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.collapsible li i {
+    margin-right: 10px;
+}
+
+.collapsible li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar .logout button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e53e3e;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+#addItemsButton {
+    padding: 10px 20px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #000000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.show {
+    display: block;
+}
+
+.content-area {
+    flex-grow: 1;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.password-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.password-item {
+    padding: 15px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.view-password {
+    padding: 5px 10px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hide modal by default */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure modal is above other content */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #e53e3e;
+}
+
+/* Animation for Modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Input Fields and Button Styling in Modal */
+.modal-content input {
+    width: calc(100% - 20px);
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #2b6cb0;
+}
+
+/* Styling for Require Master Password checkbox */
+.require-master-password {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.require-master-password input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.require-master-password label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Basic styling for the password items */
+.password-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+/* Dropdown container styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown toggle button styling */
+.dropdown-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* Dropdown menu visible when 'show' class is added */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Dropdown menu buttons styling */
+.dropdown-menu button {
+    background: none;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* Add hover effect */
+.dropdown-menu button:hover {
+    background-color: #f1f1f1;
+}

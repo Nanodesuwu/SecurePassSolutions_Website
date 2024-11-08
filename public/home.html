@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="images/SecureLogo.png" alt="Secure Logo" style="width: 210px; height: auto;" />
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-section">
+                <button class="collapse-btn" onclick="toggleSection('categories')">
+                    <i class="fas fa-chevron-down"></i> Categories
+                </button>
+                <ul id="categories" class="collapsible">
+                    <li><i class="fas fa-th-large"></i> <a href="home.html">All Items</a></li>
+                    <li><i class="fas fa-key"></i> <a href="passwords.html">Passwords</a></li>
+                    <li><i class="fas fa-sticky-note"></i> <a href="secure-notes.html">Secure Notes</a></li>
+                    <li><i class="fas fa-credit-card"></i> <a href="#">Credit Cards</a></li>
+                    <li><i class="fas fa-user"></i> <a href="personal-info.html">Personal Info</a></li>
+                    <li><i class="fas fa-trash-alt"></i> <a href="#">Trash</a></li>
+                </ul>
+            </div>
+
+            <!-- Folders -->
+            <div class="sidebar-section">
+                <button class="collapse-btn" onclick="toggleSection('folders')">
+                    <i class="fas fa-chevron-down"></i> Folders
+                </button>
+                <ul id="folders" class="collapsible">
+                    <!-- Folders will be dynamically added here -->
+                </ul>
+            </div>
+
+            <!-- Logout button -->
+            <div class="logout">
+                <button id="logoutButton">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="welcomeMessage">Welcome, User!</h1>
+                <button id="addPasswordButton">+ Add Password</button>
+            </header>
+            
+            <section class="content-area">
+                <!-- List of passwords -->
+                <div id="passwordList" class="password-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Adding or Editing Password -->
+    <div id="addPasswordModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2 id="modalTitle">Edit</h2>
+            <input type="hidden" id="passwordKey"> <!-- Hidden input for password key -->
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="text" id="username" placeholder="Username or Email" required>
+            <input type="text" id="password" placeholder="Password" required>
+            <input type="text" id="websiteUrl" placeholder="Website URL">
+            <input type="text" id="customField" placeholder="Custom Field">
+            <textarea id="notes" placeholder="Notes"></textarea>
+            
+            <!-- Master Password Requirement Checkbox -->
+            <div style="display: flex; align-items: center;">
+                <input type="checkbox" id="requireMasterPassword" style="margin-right: 10px;">
+                <label for="requireMasterPassword">Require Master Password to View</label>
+            </div>
+
+            <button id="savePasswordButton">Save Password</button>
+        </div>
+    </div>
+
+    <!-- Modal for Viewing Password -->
+    <div id="viewPasswordModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeViewModal">&times;</span>
+            <h2>View Password</h2>
+            <div id="viewPasswordDetails"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/home.js"></script>
+    <script>
+        // Toggle collapse function
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const icon = section.previousElementSibling.querySelector('i');
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+                icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
+            } else {
+                section.style.display = 'none';
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
+            }
+        }
+    </script>
+</body>
+</html>

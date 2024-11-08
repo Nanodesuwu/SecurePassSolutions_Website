@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/authenticator.css">
+    <title>Google Authenticator Setup</title>
+    <style>
+        /* Centering the input section */
+        #totpInputSection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #totpInputSection label,
+        #totpInputSection input,
+        #totpInputSection button {
+            text-align: center;
+        }
+
+        #totpInputSection input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 50%;
+        }
+
+        #totpInputSection button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        /* Centering the QR code section */
+        #qrCodeSection {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="qrCodeSection">
+        <h2>Set Up Google Authenticator</h2>
+        <p>Scan the QR code with your Google Authenticator app.</p>
+        <img id="qrCodeImage" alt="QR Code">
+        <p>Or enter this secret manually: <span id="totpSecret"></span></p>
+        <button id="verifyTotpButton">Verify</button>
+    </div>
+
+    <div id="totpInputSection">
+        <label for="totpCode">Enter the 6-digit code from Google Authenticator:</label>
+        <input type="text" id="totpCode">
+        <button id="verifyCodeButton">Verify Code</button>
+    </div>
+
+    <script>
+    // Fetch the QR code and secret
+    fetch('/generate-totp-secret', {
+        method: 'POST'
+    }).then(response => response.json()).then(data => {
+        document.getElementById('qrCodeImage').src = data.qrCodeUrl;
+        document.getElementById('totpSecret').textContent = data.secret;
+
+        // Save secret to localStorage or send it to your server for verification
+        localStorage.setItem('totpSecret', data.secret);
+    }).catch(error => {
+        console.error('Error fetching TOTP secret:', error);
+        alert('Could not generate TOTP secret. Please try again.');
+    });
+
+    // Verify the 6-digit code
+    document.getElementById('verifyCodeButton').addEventListener('click', () => {
+        const code = document.getElementById('totpCode').value;
+
+        fetch('/verify-totp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code, secret: localStorage.getItem('totpSecret') })
+        }).then(response => response.json()).then(data => {
+            if (data.verified) {
+                alert('2FA setup successfully');
+                // Redirect to home.html after successful verification
+                window.location.href = 'home.html';
+            } else {
+                alert('Invalid code, please try again');
+            }
+        }).catch(error => {
+            console.error('Error verifying TOTP code:', error);
+            alert('Could not verify TOTP code. Please try again.');
+        });
+    });
+    </script>
+</body>
+</html>

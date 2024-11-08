@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Info</title>
+    <link rel="stylesheet" href="css/personal-info.css"> <!-- Use personal-info.css for consistency -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="images/SecureLogo.png" alt="Secure Logo" />
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-section">
+                <button class="collapse-btn" onclick="toggleSection('categories')">
+                    <i class="fas fa-chevron-down"></i> Categories
+                </button>
+                <ul id="categories" class="collapsible">
+                    <li><i class="fas fa-th-large"></i> <a href="home.html">All Items</a></li>
+                    <li><i class="fas fa-key"></i> <a href="passwords.html">Passwords</a></li>
+                    <li><i class="fas fa-sticky-note"></i> <a href="#">Secure Notes</a></li>
+                    <li><i class="fas fa-credit-card"></i> <a href="#">Credit Cards</a></li>
+                    <li><i class="fas fa-user"></i> <a href="personal-info.html">Personal Info</a></li>
+                    <li><i class="fas fa-trash-alt"></i> <a href="#">Trash</a></li>
+                </ul>
+            </div>
+
+            <!-- Folders -->
+            <div class="sidebar-section">
+                <button class="collapse-btn" onclick="toggleSection('folders')">
+                    <i class="fas fa-chevron-down"></i> Folders
+                </button>
+                <ul id="folders" class="collapsible">
+                    <!-- Folders will be dynamically added here -->
+                </ul>
+            </div>
+
+            <!-- Logout button -->
+            <div class="logout">
+                <button id="logoutButton">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Personal Information</h1>
+                <button id="addPersonalInfoButton" class="top-right-button">+ Add Personal Info</button>
+            </header>
+            
+            <section class="content-area">
+                <!-- Saved Personal Info List -->
+                <div id="savedPersonalInfoList">
+                    <!-- Saved personal info will be displayed here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Personal Information Form -->
+    <div id="personalInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Add Personal Information</h2>
+            <div class="form-section">
+                <h3>Contact Details</h3>
+                <input type="text" placeholder="Full Name" id="fullName">
+                <input type="email" placeholder="Email" id="email">
+                <input type="tel" placeholder="Phone Number" id="phoneNumber">
+            </div>
+            <div class="form-section">
+                <h3>Address Details</h3>
+                <textarea placeholder="Address" id="address"></textarea>
+            </div>
+            <button id="savePersonalInfoButton">Save Information</button>
+        </div>
+    </div>
+
+    <script src="js/personal-info.js"></script>
+    <script>
+        // Toggle collapse function
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const icon = section.previousElementSibling.querySelector('i');
+            if (section.style.display === 'none') {
+                section.style.display = 'block';
+                icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
+            } else {
+                section.style.display = 'none';
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
+            }
+        }
+
+        // Show modal function
+        document.getElementById('addPersonalInfoButton').addEventListener('click', function() {
+            document.getElementById('personalInfoModal').style.display = 'flex';
+        });
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('personalInfoModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
