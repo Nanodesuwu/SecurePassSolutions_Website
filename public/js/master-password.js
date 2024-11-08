@@ -2,10 +2,11 @@ import { getDatabase, ref, set, get } from 'https://www.gstatic.com/firebasejs/9
 import { auth } from './firebase-config.js';
 
 const db = getDatabase();
-const secretKey = 'your-secret-key'; // Use a secure key in a real-world scenario
+const secretKey = 's3cur3Pa$$w0rdEncryp7ionK3y123456';
+const maxAttempts = 8;
+let attemptCount = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure that the user is authenticated
     auth.onAuthStateChanged((user) => {
         if (user) {
             const userId = user.uid;
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             get(masterPasswordRef).then((snapshot) => {
                 const formTitle = document.getElementById('formTitle');
                 const submitButton = document.getElementById('submitButton');
+                const warningMessage = document.getElementById('warningMessage'); // Display warning messages
 
                 if (snapshot.exists()) {
                     formTitle.textContent = 'Enter your Master Password';
@@ -22,16 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('masterPasswordForm').addEventListener('submit', (event) => {
                         event.preventDefault();
                         const enteredPassword = document.getElementById('masterPassword').value;
-                        
+
                         // Decrypt the saved password from Firebase
                         const encryptedPassword = snapshot.val();
                         const decryptedPassword = decryptData(encryptedPassword);
 
                         if (enteredPassword === decryptedPassword) {
-                            // Redirect to Google Authenticator page after correct master password entry
                             window.location.href = 'google-authenticator.html';
                         } else {
-                            alert('Incorrect master password.');
+                            attemptCount++;
+                            if (attemptCount >= maxAttempts) {
+                                submitButton.disabled = true;
+                                warningMessage.textContent = 'Too many incorrect attempts. Please try again later.';
+                            } else {
+                                warningMessage.textContent = `Incorrect master password. Attempt ${attemptCount} of ${maxAttempts}.`;
+                            }
                         }
                     });
                 } else {
@@ -42,19 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         event.preventDefault();
                         const newPassword = document.getElementById('masterPassword').value;
 
-                        if (newPassword) {
-                            // Encrypt the new password before saving it to Firebase
+                        if (validatePassword(newPassword)) {
                             const encryptedPassword = encryptData(newPassword);
-
                             set(masterPasswordRef, encryptedPassword).then(() => {
                                 alert('Master password set successfully!');
-                                // Redirect to Google Authenticator page after master password creation
                                 window.location.href = 'google-authenticator.html';
                             }).catch((error) => {
                                 alert('Error setting master password: ' + error.message);
                             });
                         } else {
-                            alert('Please enter a master password.');
+                            alert('Your password must be at least 7 characters long, contain at least one uppercase letter, and include at least one special character.');
                         }
                     });
                 }
@@ -62,20 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Error loading master password: ' + error.message);
             });
         } else {
-            window.location.href = 'index.html'; // Redirect if no user is logged in
+            window.location.href = 'index.html';
         }
     });
 });
 
+// Function to validate the password
+function validatePassword(password) {
+    const minLength = 7;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    return password.length >= minLength && hasUpperCase && hasSpecialChar;
+}
+
 // Function to encrypt data using AES-256
 function encryptData(data) {
-    const encrypted = CryptoJS.AES.encrypt(data, secretKey).toString();
-    return encrypted;
+    return CryptoJS.AES.encrypt(data, secretKey).toString();
 }
 
 // Function to decrypt data using AES-256
 function decryptData(encryptedData) {
     const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
-    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-    return decryptedData;
+    return bytes.toString(CryptoJS.enc.Utf8);
 }

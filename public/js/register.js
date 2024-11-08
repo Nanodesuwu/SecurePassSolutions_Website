@@ -1,12 +1,27 @@
 import { auth } from './firebase-config.js';
 import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
 
+// Function to validate the password
+function validatePassword(password) {
+    const minLength = 7; // Minimum length
+    const hasUpperCase = /[A-Z]/.test(password); // At least one uppercase letter
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password); // At least one special character
+
+    return password.length >= minLength && hasUpperCase && hasSpecialChar;
+}
+
 // Register with email and password
 document.getElementById('registerForm').addEventListener('submit', function(event) {
     event.preventDefault();
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
+    // Validate the password
+    if (!validatePassword(password)) {
+        alert('Your password must be at least 7 characters long, contain at least one uppercase letter, and include at least one special character.');
+        return; // Stop registration if password is not valid
+    }
 
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -26,6 +41,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
             .then(response => response.json())
             .then(data => {
                 alert('User registered successfully');
+                window.location.href = 'index.html'; // Redirect to index.html after registration
             })
             .catch(error => {
                 alert('Error: ' + error.message);
@@ -58,6 +74,7 @@ document.getElementById('googleRegister').addEventListener('click', function() {
             .then(response => response.json())
             .then(data => {
                 alert('User registered with Google successfully');
+                window.location.href = 'index.html'; // Redirect to index.html after registration
             })
             .catch(error => {
                 alert('Error: ' + error.message);

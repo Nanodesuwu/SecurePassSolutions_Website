@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - SecurePassSolutions</title>
+    <link rel="stylesheet" href="css/premium.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script type="module" src="js/payment.js"></script>
+   
+</head>
+<body>
+    <header>
+        <img src="images/SecureLogo.png" alt="Secure Logo" style="width: 210px; height: auto;" />
+        <h1>Payment</h1>
+        <p>Please enter your payment information to complete the purchase.</p>
+    </header>
+
+    <section class="hero">
+        <h2>Enter Payment Information</h2>
+        <p class="info-padding">Secure your premium membership today.</p>
+    </section>
+
+    <main>
+        <section id="payment-info">
+            <h2>Credit Card Information</h2>
+            <div class="price-info">Monthly Plan: RM 4.99</div>
+            <form id="paymentForm">
+                <label for="cardholderName">Cardholder Name</label>
+                <input type="text" id="cardholderName" name="cardholderName" required>
+        
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456">
+        
+                <label for="expiryDate">Expiry Date (MM/YY)</label>
+                <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY">
+        
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required placeholder="123">
+        
+                <button type="button" id="submitPayment" class="checkout-button">Submit Payment</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SecurePassSolutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("paymentForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Gather payment information
+            const cardholderName = document.getElementById("cardholderName").value;
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiryDate = document.getElementById("expiryDate").value;
+            const cvv = document.getElementById("cvv").value;
+
+            // Here you would typically handle the payment process
+            // For now, we will just log the values to the console
+            console.log("Cardholder Name:", cardholderName);
+            console.log("Card Number:", cardNumber);
+            console.log("Expiry Date:", expiryDate);
+            console.log("CVV:", cvv);
+
+            // Redirect or show a success message after handling payment
+            alert("Payment submitted successfully!"); // Replace with your actual payment handling
+        });
+    </script>
+</body>
+</html>

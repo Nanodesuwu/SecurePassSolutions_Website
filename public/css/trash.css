@@ -1,0 +1,62 @@
+.trash-list {
+    margin: 20px;
+}
+
+.trash-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.restore-button, .delete-button {
+    margin-right: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.restore-button:hover, .delete-button:hover {
+    opacity: 0.8;
+}
+
+/* Styles for the modal container */
+.modal {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    position: fixed; /* Position it fixed to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure modal is above other content */
+}
+
+/* Set the max height to 70% and make the content scrollable */
+.modal-content {
+    max-height: 70%;
+    overflow-y: auto;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 10px; /* Add padding to avoid scrollbar overlap */
+    background-color: white; /* Background color for modal content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow */
+    max-width: 600px; /* Optional: limit max width */
+}
+
+.trash-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    background-color: #48535f;
+}
+

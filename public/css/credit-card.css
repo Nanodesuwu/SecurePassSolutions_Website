@@ -1,0 +1,236 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #1f2937;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    text-align: center;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.search-bar {
+    margin: 10px 0;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
+
+.sidebar-section {
+    margin: 20px 0;
+}
+
+.collapse-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.collapse-btn i {
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.collapsible {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.collapsible li {
+    margin: 10px 0;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.collapsible li i {
+    margin-right: 10px;
+}
+
+.collapsible li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar .logout button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e53e3e;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #2a313c;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.top-bar h1 {
+    margin: 0;
+}
+
+#addItemsButton {
+    padding: 10px 20px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    position: relative;
+}
+
+.content-area {
+    flex-grow: 1;
+    background-color: #2a313c;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Credit Card List */
+.credit-card-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.credit-card-item {
+    padding: 15px;
+    background-color: #4a5568;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.credit-card-item h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.credit-card-item p {
+    margin: 5px 0;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #e53e3e;
+}
+
+/* Input Fields and Button Styling in Modal */
+.modal-content input,
+.modal-content textarea {
+    width: calc(100% - 20px);
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.modal-content button:hover {
+    background-color: #2b6cb0;
+}
+
+.view-credit-card {
+    padding: 5px 10px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.view-credit-card {
+    width: auto; /* or set a specific width */
+    max-width: fit-content; /* to avoid stretching */
+}

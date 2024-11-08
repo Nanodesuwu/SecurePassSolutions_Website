@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Premium - SecurePassSolutions</title>
+    <link rel="stylesheet" href="css/premium.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <img src="images/SecureLogo.png" alt="Secure Logo" style="width: 210px; height: auto;" />
+        <h1>Get Premium</h1>
+        <p>Unlock exclusive features and enhance your security.</p>
+    </header>
+
+    <section class="hero">
+        <h2>Upgrade to Premium</h2>
+        <p class="info-padding">Get the best protection and features for your data.</p>
+        <a href="#pricing" class="cta-button">See Plans</a>
+        <a href="home.html" class="cta-button" style="margin-top: 10px;">Home</a>
+    </section>
+
+    <main>
+        <section id="features">
+            <h2>Premium Features</h2>
+            <ul class="features-list">
+                <li><i class="fas fa-key"></i> Password Generator</li>
+                <li><i class="fas fa-check-circle"></i> Password Checker</li>
+                <li><i class="fas fa-folder-open"></i> Space to store files and images</li>
+                <li><i class="fas fa-hdd"></i> Unlimited passwords storage</li>
+                <li><i class="fas fa-user-lock"></i> Facial Recognition</a></li>
+            </ul>
+        </section>
+        
+
+        <section id="pricing">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-plan">
+                <h3>Monthly Plan</h3>
+                <p class="price">RM4.99/month</p>
+                <button class="checkout-button" id="monthlyPlan">Choose Plan</button>
+            </div>
+            <div class="pricing-plan">
+                <h3>Annual Plan</h3>
+                <p class="price">RM44.99/year</p>
+                <button class="checkout-button" id="annualPlan">Choose Plan</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SecurePassSolutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("monthlyPlan").addEventListener("click", function() {
+            // Redirect to monthly checkout page
+            window.location.href = "payment.html"; // Replace with your actual checkout page
+        });
+
+        document.getElementById("annualPlan").addEventListener("click", function() {
+            // Redirect to annual checkout page
+            window.location.href = "payment.html"; // Replace with your actual checkout page
+        });
+    </script>
+</body>
+</html>

@@ -45,7 +45,7 @@ body {
 }
 
 .sidebar-section {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 
 .collapse-btn {
@@ -101,7 +101,7 @@ body {
 
 .main-content {
     flex-grow: 1;
-    background-color: #ffffff;
+    background-color: #2a313c;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -158,7 +158,7 @@ body {
 
 .content-area {
     flex-grow: 1;
-    background-color: #f7fafc;
+    background-color: #2a313c;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -171,7 +171,7 @@ body {
 
 .password-item {
     padding: 15px;
-    background-color: #ffffff;
+    background-color: #4a5568;
     margin-bottom: 10px;
     border-radius: 5px;
     display: flex;
@@ -326,3 +326,27 @@ body {
 .dropdown-menu button:hover {
     background-color: #f1f1f1;
 }
+
+#addPasswordButton {
+    padding: 10px 20px;
+    background-color: #3182ce;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+#addPasswordButton:hover {
+    background-color: #2b6cb0;
+}
+
+.modal-content {
+    max-height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 10px; /* Add padding to avoid scrollbar overlap */
+}
+

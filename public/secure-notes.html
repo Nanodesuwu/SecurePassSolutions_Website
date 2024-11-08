@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Notes</title>
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/secure-notes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 </head>
@@ -18,7 +19,7 @@
 
             <!-- Search bar -->
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
+                <input type="text" id="searchNote" placeholder="Search Secure-Notes...">
             </div>
 
             <!-- Categories -->
@@ -30,21 +31,42 @@
                     <li><i class="fas fa-th-large"></i> <a href="home.html">All Items</a></li>
                     <li><i class="fas fa-key"></i> <a href="passwords.html">Passwords</a></li>
                     <li><i class="fas fa-sticky-note"></i> <a href="secure-notes.html">Secure Notes</a></li>
-                    <li><i class="fas fa-credit-card"></i> <a href="#">Credit Cards</a></li>
+                    <li><i class="fas fa-credit-card"></i> <a href="credit-card.html">Credit Cards</a></li>
                     <li><i class="fas fa-user"></i> <a href="personal-info.html">Personal Info</a></li>
-                    <li><i class="fas fa-trash-alt"></i> <a href="#">Trash</a></li>
+                    <li><i class="fas fa-trash-alt"></i> <a href="trash.html">Trash</a></li>
+                    <li><i class="fas fa-crown"></i> <a href="get-premium.html" id="getPremium">Get Premium</a></li>
                 </ul>
             </div>
 
-            <!-- Folders -->
             <div class="sidebar-section">
-                <button class="collapse-btn" onclick="toggleSection('folders')">
-                    <i class="fas fa-chevron-down"></i> Folders
-                </button>
-                <ul id="folders" class="collapsible">
-                    <!-- Folders will be dynamically added here -->
-                </ul>
+                <div class="settings-link" id="settingsButton">
+                    <i class="fas fa-cog"></i>
+                </div>
             </div>
+
+
+            <link rel="stylesheet" href="css/settings.css">
+            <script type="module" src="js/settings.js"></script>
+            <!-- Modal Structure -->
+<div id="customSettingsPopup" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-btn">&times;</span> <!-- Close button -->
+        <h2>Reset Master Password</h2>
+        <form id="resetPasswordForm">
+            <label for="currentPassword">Current Master Password:</label>
+            <input type="password" id="currentPassword" required>
+
+            <label for="newPassword">New Master Password:</label>
+            <input type="password" id="newPassword" required>
+
+            <label for="confirmPassword">Confirm New Master Password:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <button type="submit">Reset Password</button>
+        </form>
+        <p id="resetStatus"></p>
+    </div>
+</div>
 
             <!-- Logout button -->
             <div class="logout">
@@ -70,7 +92,7 @@
     <div id="addNoteModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-button" id="closeModal">&times;</span>
-            <h2 id="modalTitle">Edit Secure Note</h2>
+            <h2 id="modalTitle">Create/Edit Secure Note</h2>
             <input type="hidden" id="noteKey"> <!-- Hidden input for note key -->
             <input type="text" id="title" placeholder="Note Title" required>
             <textarea id="content" placeholder="Your Secure Note" required></textarea>

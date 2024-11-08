@@ -3,7 +3,7 @@ import { getDatabase, ref, get, set } from 'https://www.gstatic.com/firebasejs/9
 import { auth } from './firebase-config.js';
 
 // AES Encryption and Decryption Functions
-const SECRET_KEY = 'ThisIsASecretKeyForAES256'; // Should be securely managed
+const SECRET_KEY = 's3cur3Pa$$w0rdEncryp7ionK3y123456'; // Should be securely managed
 
 function encrypt(text) {
     return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
@@ -15,15 +15,17 @@ function decrypt(encryptedText) {
 }
 
 const db = getDatabase();
+let loginAttempts = 0;
+const maxLoginAttempts = 8;
 
 // Function to check for master password
 function checkMasterPassword(userId) {
     const masterPasswordRef = ref(db, 'MasterPasswords/' + userId);
     return get(masterPasswordRef).then((snapshot) => {
         if (snapshot.exists()) {
-            return snapshot.val(); // Return the master password if it exists
+            return snapshot.val();
         } else {
-            return null; // No master password set
+            return null;
         }
     });
 }
@@ -39,18 +41,22 @@ function setMasterPassword(userId, password) {
 function handleLogin(user) {
     checkMasterPassword(user.uid).then((encryptedMasterPassword) => {
         if (encryptedMasterPassword) {
-            // Redirect to master-password.html to enter existing master password
             window.location.href = 'master-password.html?mode=login';
         } else {
-            // Redirect to master-password.html to create a new master password
             window.location.href = 'master-password.html?mode=create';
         }
     });
 }
 
-// Email and password login
+
+// Email and password login with attempt limit
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
+
+    if (loginAttempts >= maxLoginAttempts) {
+        document.getElementById('loginWarning').textContent = "Too many login attempts. Please try again later.";
+        return;
+    }
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -61,7 +67,13 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             handleLogin(user);
         })
         .catch((error) => {
-            alert('Error: ' + error.message);
+            loginAttempts++;
+            if (loginAttempts >= maxLoginAttempts) {
+                document.getElementById('loginForm').querySelector('button[type="submit"]').disabled = true;
+                document.getElementById('loginWarning').textContent = "Too many login attempts. Please try again later.";
+            } else {
+                document.getElementById('loginWarning').textContent = `Error: ${error.message} (Attempt ${loginAttempts} of ${maxLoginAttempts})`;
+            }
         });
 });
 
@@ -74,8 +86,8 @@ document.getElementById('googleLogin').addEventListener('click', function() {
             handleLogin(user);
         })
         .catch((error) => {
-            alert('Error: ' + error.message);
-            console.error('Google Sign-In Error:', error);  // Log the error for debugging
+            document.getElementById('loginWarning').textContent = 'Error: ' + error.message;
+            console.error('Google Sign-In Error:', error);
         });
 });
 
@@ -86,13 +98,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (masterPasswordField && togglePasswordButton) {
         togglePasswordButton.addEventListener('click', function() {
-            // Toggle the password field type
             if (masterPasswordField.type === 'password') {
                 masterPasswordField.type = 'text';
-                togglePasswordButton.textContent = 'Hide'; // Change button text to 'Hide'
+                togglePasswordButton.textContent = 'Hide';
             } else {
                 masterPasswordField.type = 'password';
-                togglePasswordButton.textContent = 'Show'; // Change button text to 'Show'
+                togglePasswordButton.textContent = 'Show';
             }
         });
     }

@@ -1,0 +1,154 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1f2937; 
+    color: #ffffff;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #2d3748; /* Darker shade for header */
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    color: #fbbf24; /* Gold color for headings */
+}
+
+p {
+    margin: 10px 0;
+}
+
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(to right, #3b82f6, #2563eb); 
+    color: white;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.cta-button {
+    background-color: #fbbf24; 
+    color: #1f2937; 
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #fcd34d;
+}
+
+main {
+    padding: 20px;
+}
+
+#features, #pricing, #payment-info { 
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #2d3748;
+    border-radius: 10px;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    padding: 10px 0;
+}
+
+.pricing-plan {
+    background-color: #374151; 
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fbbf24; 
+}
+
+.checkout-button {
+    background-color: #fbbf24; 
+    color: #1f2937; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+    background-color: #fcd34d; /* Lighter gold on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2d3748; 
+}
+
+.info-padding {
+    padding-bottom: 20px; 
+}
+
+
+#payment-info {
+    background-color: #2d3748; 
+    border-radius: 10px;
+    padding: 20px; 
+    max-width: 400px; 
+    margin: 20px auto; 
+}
+
+.price-info {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #fbbf24; 
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #fbbf24; 
+}
+
+input {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #374151; 
+    color: #ffffff;
+}
+
+input:focus {
+    border-color: #fbbf24; 
+    outline: none;
+}
+
+
+#paymentForm {
+    padding: 15px; 
+}

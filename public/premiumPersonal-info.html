@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Info</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/personal-info.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="images/SecureLogo.png" alt="Secure Logo" style="width: 210px; height: auto;" />
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInfo" placeholder="Search Personal-Info...">
+            </div>
+
+            <!-- Categories -->
+            <div class="sidebar-section">
+                <button class="collapse-btn" onclick="toggleSection('categories')">
+                    <i class="fas fa-chevron-down"></i> Categories
+                </button>
+                <ul id="categories" class="collapsible">
+                    <li><i class="fas fa-th-large"></i> <a href="premiumHome.html">All Items</a></li>
+                    <li><i class="fas fa-key"></i> <a href="premiumPassword.html">Passwords</a></li>
+                    <li><i class="fas fa-sticky-note"></i> <a href="premiumSecure-notes.html">Secure Notes</a></li>
+                    <li><i class="fas fa-credit-card"></i> <a href="premiumCredit-card.html">Credit Cards</a></li>
+                    <li><i class="fas fa-user"></i> <a href="premiumPersonal-info.html">Personal Info</a></li>
+                    <li><i class="fas fa-key"></i> <a href="password-generator.html">Password Generator</a> <i class="fas fa-crown" style="color: gold; margin-left: 5px;"></i></li>
+                    <li><i class="fas fa-check-circle"></i> <a href="password-checker.html">Password Checker</a> <i class="fas fa-crown" style="color: gold; margin-left: 5px;"></i></li>
+                    <li><i class="fas fa-trash-alt"></i> <a href="premiumTrash.html">Trash</a></li>
+                    <li><i class="fas fa-user-circle"></i> <a href="face.html">Facial Recognition</a> <i class="fas fa-crown" style="color: gold; margin-left: 5px;"></i></li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="settings-link" id="settingsButton">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+
+
+            <link rel="stylesheet" href="css/settings.css">
+            <script type="module" src="js/settings.js"></script>
+            <!-- Modal Structure -->
+<div id="customSettingsPopup" class="custom-modal">
+    <div class="custom-modal-content">
+        <span class="close-btn">&times;</span> <!-- Close button -->
+        <h2>Reset Master Password</h2>
+        <form id="resetPasswordForm">
+            <label for="currentPassword">Current Master Password:</label>
+            <input type="password" id="currentPassword" required>
+
+            <label for="newPassword">New Master Password:</label>
+            <input type="password" id="newPassword" required>
+
+            <label for="confirmPassword">Confirm New Master Password:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <button type="submit">Reset Password</button>
+        </form>
+        <p id="resetStatus"></p>
+    </div>
+</div>
+          
+
+            <!-- Logout button -->
+            <div class="logout">
+                <button id="logoutButton">Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="welcomeMessage">Welcome, User!</h1>
+                <button id="addInfoButton">+ Add Personal Info</button>
+            </header>
+            
+            <section class="content-area">
+                <!-- Video Element for Facial Recognition -->
+                <video id="video" width="720" height="560" style="display: none;" autoplay></video>
+                
+                <!-- Notification Area -->
+                <div id="recognitionStatus" style="display: none; margin-top: 10px;"></div>
+            
+                <!-- List of personal info -->
+                <div id="infoList" class="info-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Adding or Editing Personal Info -->
+    <div id="addInfoModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2 id="modalTitle">Add/Edit Personal Info</h2>
+            <input type="hidden" id="infoKey"> <!-- Hidden input for info key -->
+            <input type="text" id="fullName" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="phone" placeholder="Phone">
+            <input type="text" id="addressLine1" placeholder="Address Line 1">
+            <input type="text" id="addressLine2" placeholder="Address Line 2">
+            <input type="text" id="city" placeholder="City">
+            <input type="text" id="state" placeholder="State">
+            <input type="text" id="zipCode" placeholder="Zip Code">
+            <input type="text" id="country" placeholder="Country">
+            <input type="text" id="customField" placeholder="Custom Field">
+            <input type="text" id="notes" placeholder="Notes">
+            <div>
+                <label for="fileInput">Upload Image or File:</label>
+                <input type="file" id="fileUpload">
+            </div>
+            <!-- Master Password Requirement Checkbox -->
+        <div style="display: flex; align-items: center;">
+            <input type="checkbox" id="requireMasterPassword" style="margin-right: 10px;">
+            <label for="requireMasterPassword">Require Master Password to View</label>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <input type="checkbox" id="requireFacialRecognition" style="margin-right: 10px;">
+            <label for="requireFacialRecognition">Require Facial Recognition</label>
+        </div>
+            <button id="saveInfoButton">Save Info</button>
+        </div>
+
+    </div>
+
+    <!-- Modal for Viewing Personal Info -->
+    <div id="viewInfoModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="closeViewModal">&times;</span>
+            <h2>View Personal Info</h2>
+            <div id="viewInfoDetails"></div>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/premiumPersonal-info.js"></script>
+    <script>
+        // Toggle collapse function
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const icon = section.previousElementSibling.querySelector('i');
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+                icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
+            } else {
+                section.style.display = 'none';
+                icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
+            }
+        }
+    </script>
+</body>
+</html>

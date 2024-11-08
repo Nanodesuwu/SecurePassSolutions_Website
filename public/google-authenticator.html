@@ -43,7 +43,7 @@
         <p>Scan the QR code with your Google Authenticator app.</p>
         <img id="qrCodeImage" alt="QR Code">
         <p>Or enter this secret manually: <span id="totpSecret"></span></p>
-        <button id="verifyTotpButton">Verify</button>
+      
     </div>
 
     <div id="totpInputSection">
@@ -52,44 +52,6 @@
         <button id="verifyCodeButton">Verify Code</button>
     </div>
 
-    <script>
-    // Fetch the QR code and secret
-    fetch('/generate-totp-secret', {
-        method: 'POST'
-    }).then(response => response.json()).then(data => {
-        document.getElementById('qrCodeImage').src = data.qrCodeUrl;
-        document.getElementById('totpSecret').textContent = data.secret;
-
-        // Save secret to localStorage or send it to your server for verification
-        localStorage.setItem('totpSecret', data.secret);
-    }).catch(error => {
-        console.error('Error fetching TOTP secret:', error);
-        alert('Could not generate TOTP secret. Please try again.');
-    });
-
-    // Verify the 6-digit code
-    document.getElementById('verifyCodeButton').addEventListener('click', () => {
-        const code = document.getElementById('totpCode').value;
-
-        fetch('/verify-totp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ code, secret: localStorage.getItem('totpSecret') })
-        }).then(response => response.json()).then(data => {
-            if (data.verified) {
-                alert('2FA setup successfully');
-                // Redirect to home.html after successful verification
-                window.location.href = 'home.html';
-            } else {
-                alert('Invalid code, please try again');
-            }
-        }).catch(error => {
-            console.error('Error verifying TOTP code:', error);
-            alert('Could not verify TOTP code. Please try again.');
-        });
-    });
-    </script>
+    <script type="module" src="js/google-authenticator.js"></script>
 </body>
 </html>

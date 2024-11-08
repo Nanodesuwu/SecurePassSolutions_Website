@@ -1,6 +1,10 @@
 #qrCodeSection {
     text-align: center;
     margin-top: 50px;
+    background-color: #1f2531; /* Darker shade for contrast */
+    padding: 20px; /* Added padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
 }
 
 img#qrCodeImage {
@@ -12,15 +16,24 @@ input#totpCode {
     padding: 10px;
     width: 200px;
     margin-top: 20px;
+    border: 1px solid #ccc; /* Border for input */
+    border-radius: 4px; /* Rounded corners for input */
 }
 
 button {
     padding: 10px;
     margin-top: 20px;
     cursor: pointer;
-    background-color: #3182ce;
-    color: white;
+    background-color: #3182ce; /* Button color */
+    color: white; /* Button text color */
     border: none;
     border-radius: 5px;
 }
 
+button:hover {
+    background-color: #2b6cb0; /* Button hover color */
+}
+
+body {
+    background-color: #1f2531;
+}
